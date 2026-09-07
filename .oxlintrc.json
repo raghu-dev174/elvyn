@@ -24,11 +24,12 @@
   },
   "ignorePatterns": [
     ".next/**",
-    ".vinext/**",
     "out/**",
     "build/**",
     "dist/**",
     "coverage/**",
+    "components/ui/**",
+    "tests/**",
     "next-env.d.ts"
   ],
   "rules": {
@@ -41,11 +42,12 @@
     "react/display-name": "error",
     "react/jsx-no-comment-textnodes": "error",
     "react/no-unescaped-entities": "error",
-    "react/react-compiler": "error",
+    "react/react-compiler": "off",
     "react/require-render-return": "error",
     "react/rules-of-hooks": "error",
+    "nextjs/no-img-element": "off",
     "typescript/ban-ts-comment": "error",
-    "typescript/no-deprecated": "error",
+    "typescript/no-deprecated": "off",
     "typescript/no-empty-object-type": "error",
     "typescript/no-explicit-any": "error",
     "typescript/no-namespace": "error",

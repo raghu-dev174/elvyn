@@ -1,6 +1,6 @@
 # ELVYN
 
-Independent web studio built with React, TypeScript, the Next.js App Router API, and Vinext on the Sites Worker runtime.
+Independent web studio built with React, TypeScript, and the Next.js App Router for deployment on Vercel.
 
 ## Local development
 
@@ -27,7 +27,7 @@ The frontend disables submission and uses an immediate ref lock against double c
 
 ## Deployment
 
-Set the same three variables as server runtime secrets in Sites before accepting enquiries. Local .env files are not deployment configuration and must never enter a source archive or client bundle.
+Set the same three variables as Vercel Environment Variables before accepting enquiries. Local .env files are not deployment configuration and must never enter source control or a client bundle.
 
 ## Content
 
@@ -40,5 +40,6 @@ Instagram and LinkedIn profile URLs are pending; no fabricated links are publish
 npm run build
 npx tsc --noEmit
 node --conditions=react-server --experimental-strip-types --test tests/inquiry.test.mjs
+node tests/check-client-secrets.mjs
 
 The unit suite mocks the SDK transport and sends no real email. HTTP and browser integration checks are performed separately against the running site.

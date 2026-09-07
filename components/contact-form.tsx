@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import {
@@ -214,9 +215,9 @@ export default function ContactForm() {
           review your project and get in touch at <strong>{brief.email}</strong>{' '}
           to talk through the next steps.
         </p>
-        <a className="link-button" href="/">
+        <Link className="link-button" href="/">
           Back to the studio <span>↗</span>
-        </a>
+        </Link>
       </div>
     );
   return (

@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useState } from 'react';
 import {
   Dialog,
@@ -23,29 +24,29 @@ export function LinkButton({
   light?: boolean;
 }) {
   return (
-    <a className={`link-button ${light ? 'text-button' : ''}`} href={href}>
+    <Link className={`link-button ${light ? 'text-button' : ''}`} href={href}>
       {children}
       <span aria-hidden="true">↗</span>
-    </a>
+    </Link>
   );
 }
 export function Header() {
   const [open, setOpen] = useState(false);
   return (
     <header className="header">
-      <a href="/" className="wordmark" aria-label="ELVYN home">
+      <Link href="/" className="wordmark" aria-label="ELVYN home">
         ELVYN<span>WEB STUDIO</span>
-      </a>
+      </Link>
       <nav aria-label="Main navigation" className="desktop-nav">
         {nav.map(([t, h]) => (
-          <a key={t} href={h}>
+          <Link key={t} href={h}>
             {t}
-          </a>
+          </Link>
         ))}
       </nav>
-      <a className="header-cta" href="/contact">
+      <Link className="header-cta" href="/contact">
         Start a project <span aria-hidden="true">↗</span>
-      </a>
+      </Link>
       <div className="mobile-menu">
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger className="menu-trigger">
@@ -56,10 +57,10 @@ export function Header() {
             <DialogDescription>Independent web studio</DialogDescription>
             <nav aria-label="Mobile navigation">
               {[...nav, ['Start a project', '/contact']].map(([t, h]) => (
-                <a key={t} href={h} onClick={() => setOpen(false)}>
+                <Link key={t} href={h} onClick={() => setOpen(false)}>
                   {t}
                   <span>↗</span>
-                </a>
+                </Link>
               ))}
             </nav>
             <span className="meta available">AVAILABLE FOR PROJECTS</span>
@@ -135,9 +136,9 @@ export function Footer() {
   return (
     <footer className="footer wrap">
       <div className="footer-top">
-        <a href="/" className="wordmark">
+        <Link href="/" className="wordmark">
           ELVYN<span>WEB STUDIO</span>
-        </a>
+        </Link>
         <p>
           Premium websites.
           <br />
@@ -145,16 +146,16 @@ export function Footer() {
         </p>
         <nav aria-label="Footer navigation">
           {[...nav, ['Contact', '/contact']].map(([t, h]) => (
-            <a key={t} href={h}>
+            <Link key={t} href={h}>
               {t}
-            </a>
+            </Link>
           ))}
         </nav>
       </div>
       <div className="footer-bottom meta">
         <span>© 2026 ELVYN</span>
         <span>INDEPENDENT BY DESIGN.</span>
-        <a href="#main">BACK TO TOP ↑</a>
+        <Link href="#main">BACK TO TOP ↑</Link>
       </div>
     </footer>
   );

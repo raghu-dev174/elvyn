@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Link from 'next/link';
 import { Header, Footer } from '@/components/studio';
 import ContactForm from '@/components/contact-form';
 export const metadata: Metadata = {
@@ -34,9 +35,9 @@ export default function ContactPage() {
                 touch to discuss a clear scope and price.
               </p>
             </div>
-            <a href="/#pricing" className="underlined">
+            <Link href="/#pricing" className="underlined">
               Explore our pricing ↗
-            </a>
+            </Link>
           </div>
         </div>
         <ContactForm />
