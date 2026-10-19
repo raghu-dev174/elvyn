@@ -6,7 +6,12 @@ import {
   faqs,
   projects,
 } from '@/lib/content';
-import { SectionLabel, LinkButton, ProjectDialog } from '@/components/studio';
+import {
+  SectionLabel,
+  LinkButton,
+  ProjectDialog,
+  RiftProject,
+} from '@/components/studio';
 export default function HomeSections() {
   return (
     <>
@@ -93,13 +98,14 @@ export default function HomeSections() {
         <SectionLabel number="004">DESIGN IN PRACTICE</SectionLabel>
         <div className="section-heading">
           <h2>
-            SELECTED WORK<span className="heading-count">(02)</span>
+            SELECTED WORK<span className="heading-count">(03)</span>
           </h2>
           <p>
-            A few possibilities. These independent concept projects show how we
-            think, design, and build.
+            Independent concept projects that show how we think, design, and
+            build — from focused brand worlds to immersive digital campaigns.
           </p>
         </div>
+        <RiftProject />
         <div className="project-grid">
           {projects.map((p) => (
             <ProjectDialog key={p.index} {...p} />

@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import {
@@ -231,5 +232,86 @@ export function ProjectDialog({
         </div>
       </DialogContent>
     </Dialog>
+  );
+}
+
+const riftUrl = 'https://riftstreetwear.vercel.app/';
+
+export function RiftProject() {
+  return (
+    <article className="rift-project" aria-labelledby="rift-project-title">
+      <div className="rift-project-head">
+        <div className="rift-project-meta meta">
+          <span>PROJECT / 003 · CONCEPT WEBSITE / FASHION CAMPAIGN</span>
+          <span className="concept">CONCEPT PROJECT</span>
+        </div>
+        <div className="rift-project-title-row">
+          <h3 id="rift-project-title">RIFT® — NO SAFE FORM</h3>
+          <span className="meta">A CONCEPT BY ELVYN</span>
+        </div>
+      </div>
+
+      <a
+        className="rift-preview"
+        href={riftUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Explore the live RIFT concept website in a new tab"
+      >
+        <div className="rift-browser-bar meta" aria-hidden="true">
+          <span className="rift-browser-dots">
+            <i />
+            <i />
+            <i />
+          </span>
+          <span>riftstreetwear.vercel.app</span>
+          <span>LIVE SITE ↗</span>
+        </div>
+        <div className="rift-preview-media">
+          <Image
+            src="/images/rift-preview.png"
+            alt="RIFT campaign homepage with oversized white lettering over a monochrome streetwear portrait"
+            fill
+            sizes="(max-width: 700px) calc(100vw - 40px), (max-width: 1000px) calc(100vw - 64px), min(1600px, calc(100vw - 112px))"
+            quality={88}
+          />
+          <span className="rift-preview-action meta" aria-hidden="true">
+            ENTER THE RIFT ↗
+          </span>
+        </div>
+      </a>
+
+      <div className="rift-project-body">
+        <p className="rift-project-description">
+          An experimental streetwear campaign exploring brutalist composition,
+          oversized editorial typography, atmospheric imagery, and immersive
+          digital storytelling. A fictional fashion brand concept created by
+          ELVYN to demonstrate the possibilities of expressive, high-impact web
+          design.
+        </p>
+        <dl className="rift-project-details">
+          <div>
+            <dt className="meta">DIRECTION</dt>
+            <dd>Editorial / Brutalist</dd>
+          </div>
+          <div>
+            <dt className="meta">EXPERIENCE</dt>
+            <dd>Motion-led campaign</dd>
+          </div>
+          <div>
+            <dt className="meta">SCOPE</dt>
+            <dd>Direction · Design · Build</dd>
+          </div>
+        </dl>
+        <a
+          className="link-button rift-project-link"
+          href={riftUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Explore Project <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </article>
   );
 }
