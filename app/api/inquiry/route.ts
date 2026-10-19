@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     if (Object.keys(errors).length)
       return respond(
         { message: 'Please check the highlighted fields.', errors },
-        422,
+        400,
       );
     const suppliedKey = request.headers.get('idempotency-key');
     if (suppliedKey && !/^[a-zA-Z0-9_-]{16,100}$/.test(suppliedKey))
@@ -72,21 +72,17 @@ export async function POST(request: Request) {
     return respond({ ok: true }, 200);
   } catch (error) {
     const delivery = error instanceof InquiryDeliveryError;
-    const status = delivery ? error.status : 500;
-    console.error(
-      '[inquiry]',
-      delivery ? error.category : 'unexpected_failure',
-    );
-    const message =
-      status === 429
-        ? 'We’re receiving a lot of enquiries right now. Please wait a moment and try again.'
-        : status === 409
-          ? 'Your brief is still being processed. Please wait a moment before trying again.'
-          : unavailable;
-    return respond(
-      { message },
-      status,
-      status === 429 || status === 409 ? { 'Retry-After': '10' } : {},
-    );
+    const status = 500;
+    if (delivery && error.missingVariables?.length)
+      console.error(
+        '[inquiry] missing_configuration. Missing environment variables:',
+        error.missingVariables.join(', '),
+      );
+    else
+      console.error(
+        '[inquiry]',
+        delivery ? error.category : 'unexpected_failure',
+      );
+    return respond({ message: unavailable }, status);
   }
 }

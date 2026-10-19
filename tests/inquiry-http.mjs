@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 const url='http://localhost:3000/api/inquiry';
 const valid={name:'Validation Test',business:'Test Company',email:'test@example.com',whatsapp:'+91 98765 43210',service:'New Website',budget:'₹8k–₹15k',details:'This request should be rejected before reaching the email provider.',references:'',timeline:'Flexible',website:''};
 const cases=[
- ['invalid email', {...valid,email:'invalid'}, {},422],
- ['missing required fields', {},{},422],
- ['unsafe reference', {...valid,references:'javascript:alert(1)'},{},422],
+ ['invalid email', {...valid,email:'invalid'}, {},400],
+ ['missing required fields', {},{},400],
+ ['unsafe reference', {...valid,references:'javascript:alert(1)'},{},400],
  ['cross-origin', valid,{Origin:'https://unrelated.example'},403],
  ['invalid idempotency key',valid,{'Idempotency-Key':'bad'},400],
  ['honeypot',{...valid,website:'spam'}, {},400],

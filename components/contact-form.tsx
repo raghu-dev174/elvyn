@@ -78,25 +78,20 @@ export default function ContactForm() {
       });
       const body = (await r.json()) as {
         ok?: boolean;
+        message?: string;
         errors?: Partial<Record<keyof Brief, string>>;
       };
       if (!r.ok) {
-        if (r.status === 422 && body.errors) {
+        if (r.status === 400 && body.errors) {
           setErrors(body.errors);
           focusError(body.errors);
-          setMessage('Please check the highlighted fields.');
-        } else if (r.status === 429)
+          setMessage(body.message || 'Please check the highlighted fields.');
+        } else {
           setMessage(
-            'We’re receiving a lot of enquiries right now. Please wait a moment and try again.',
+            body.message ||
+              'We couldn’t send your brief right now. Your details are still here. Please try again shortly, or save a copy below.',
           );
-        else if (r.status === 409)
-          setMessage(
-            'Your brief is still being processed. Please wait a moment before trying again.',
-          );
-        else
-          setMessage(
-            'We couldn’t send your brief right now. Your details are still here. Please try again shortly, or save a copy below.',
-          );
+        }
         setStatus('error');
         return;
       }

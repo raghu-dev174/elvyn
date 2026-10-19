@@ -19,7 +19,7 @@ export const services = [
 export const packages = [
   {
     name: 'Starter',
-    price: '₹8,000–₹15,000',
+    price: '₹4,000–₹8,000',
     maintenance: '₹1,500',
     intro: 'A strong first impression.',
     features: [
@@ -28,7 +28,6 @@ export const packages = [
       'Essential business sections',
       'Contact form',
       'WhatsApp / contact CTA',
-      'Basic animations',
       'Basic SEO',
       'Deployment billed separately',
       'Hosting setup assistance',
@@ -37,11 +36,11 @@ export const packages = [
     timeline: 'Approximately 1 week',
     hosting:
       'Hosting purchased directly by you. Deployment is billed separately.',
-    budget: '₹8k–₹15k',
+    budget: '₹4k–₹8k',
   },
   {
     name: 'Business',
-    price: '₹15,000–₹30,000',
+    price: '₹10,000–₹30,000',
     maintenance: '₹3,000',
     intro: 'Room for your business to grow.',
     features: [
@@ -60,7 +59,7 @@ export const packages = [
     timeline: 'Approximately 1 week',
     hosting:
       'Hosting purchased directly by you. Deployment is billed separately.',
-    budget: '₹15k–₹30k',
+    budget: '₹10k–₹30k',
   },
   {
     name: 'Premium',

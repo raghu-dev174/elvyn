@@ -5,10 +5,16 @@ import type { Brief } from '../inquiry';
 export class InquiryDeliveryError extends Error {
   status: number;
   category: string;
-  constructor(status: number, category: string) {
+  missingVariables?: string[];
+  constructor(
+    status: number,
+    category: string,
+    missingVariables?: string[],
+  ) {
     super('Inquiry delivery failed');
     this.status = status;
     this.category = category;
+    this.missingVariables = missingVariables;
   }
 }
 
@@ -54,13 +60,22 @@ export async function sendInquiryEmail(brief: Brief, idempotencyKey: string) {
   const key = process.env.RESEND_API_KEY?.trim();
   const from = process.env.INQUIRY_FROM_EMAIL?.trim();
   const to = process.env.INQUIRY_TO_EMAIL?.trim();
-  if (!key || !from || !to)
-    throw new InquiryDeliveryError(503, 'missing_configuration');
+  if (!key || !to || !from) {
+    const missingVariables: string[] = [];
+    if (!key) missingVariables.push('RESEND_API_KEY');
+    if (!to) missingVariables.push('INQUIRY_TO_EMAIL');
+    if (!from) missingVariables.push('INQUIRY_FROM_EMAIL');
+    throw new InquiryDeliveryError(
+      500,
+      'missing_configuration',
+      missingVariables,
+    );
+  }
   // Reject configuration mistakes without revealing addresses or credentials.
   const address = /^[^\s@<>]+@[^\s@<>]+\.[^\s@<>]+$/;
   const fromAddress = from.match(/<([^<>]+)>$/)?.[1] ?? from;
   if (!address.test(to) || !address.test(fromAddress) || /[\r\n]/.test(from)) {
-    throw new InquiryDeliveryError(503, 'invalid_configuration');
+    throw new InquiryDeliveryError(500, 'invalid_configuration');
   }
   const resend = new Resend(key);
   const email: CreateEmailOptions = {
@@ -73,18 +88,10 @@ export async function sendInquiryEmail(brief: Brief, idempotencyKey: string) {
   try {
     result = await resend.emails.send(email, { idempotencyKey });
   } catch {
-    throw new InquiryDeliveryError(502, 'provider_connection');
+    throw new InquiryDeliveryError(500, 'provider_connection');
   }
   if (result.error) {
     const upstream = result.error.statusCode;
-    const status =
-      upstream === 429
-        ? 429
-        : upstream === 409
-          ? 409
-          : upstream === 401 || upstream === 403
-            ? 503
-            : 502;
     // Use only a bounded category in logs; never propagate the provider message.
     const category =
       upstream === 401
@@ -96,9 +103,9 @@ export async function sendInquiryEmail(brief: Brief, idempotencyKey: string) {
             : upstream === 409
               ? 'provider_duplicate_in_progress'
               : 'provider_rejected';
-    throw new InquiryDeliveryError(status, category);
+    throw new InquiryDeliveryError(500, category);
   }
   if (!result.data?.id)
-    throw new InquiryDeliveryError(502, 'provider_empty_response');
+    throw new InquiryDeliveryError(500, 'provider_empty_response');
   return { id: result.data.id };
 }
