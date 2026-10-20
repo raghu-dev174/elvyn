@@ -867,6 +867,12 @@ h3 {
 .project-info p {
   font-size: 14px;
 }
+.project-info .project-disclosure {
+  grid-column: 1/-1;
+  margin-top: -5px;
+  color: #999;
+  font-size: 11px;
+}
 .project-link {
   grid-column: 1/-1;
   display: block;

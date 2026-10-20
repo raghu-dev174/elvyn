@@ -1,5 +1,30 @@
+import type { Metadata } from 'next';
 import { Header, Footer, LinkButton, Showcase } from '@/components/studio';
 import HomeSections from '@/components/home-sections';
+
+export const metadata: Metadata = {
+  alternates: { canonical: '/' },
+  openGraph: {
+    url: '/',
+    title: 'ELVYN — Premium websites. Sensible pricing.',
+    description:
+      'ELVYN is an independent web studio designing and building premium websites at sensible prices. Good design. Clear pricing. No technical hassle.',
+    images: [
+      {
+        url: '/images/rift-preview.png',
+        alt: 'RIFT, an ELVYN concept website preview',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ELVYN — Premium websites. Sensible pricing.',
+    description:
+      'ELVYN is an independent web studio designing and building premium websites at sensible prices. Good design. Clear pricing. No technical hassle.',
+    images: ['/images/rift-preview.png'],
+  },
+};
+
 export default function Home() {
   return (
     <>
@@ -24,7 +49,9 @@ export default function Home() {
             <div>
               <p>
                 We design and build modern websites for businesses — quickly,
-                affordably, and without the technical hassle.
+                affordably, and without the technical hassle. We work with
+                startups, entrepreneurs, and local businesses, whether they
+                need a new website or a thoughtful redesign.
               </p>
               <div className="actions">
                 <LinkButton href="/contact">Start a project</LinkButton>

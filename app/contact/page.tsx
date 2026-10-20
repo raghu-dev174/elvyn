@@ -6,6 +6,26 @@ export const metadata: Metadata = {
   title: 'Start a project',
   description:
     'Tell ELVYN what you’re building. Share your project, budget, and goals and let’s create something worth visiting.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    url: '/contact',
+    title: 'Start a project — ELVYN',
+    description:
+      'Tell ELVYN what you’re building. Share your project, budget, and goals and let’s create something worth visiting.',
+    images: [
+      {
+        url: '/images/rift-preview.png',
+        alt: 'RIFT, an ELVYN concept website preview',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Start a project — ELVYN',
+    description:
+      'Tell ELVYN what you’re building. Share your project, budget, and goals and let’s create something worth visiting.',
+    images: ['/images/rift-preview.png'],
+  },
 };
 export default function ContactPage() {
   return (

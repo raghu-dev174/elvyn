@@ -202,6 +202,9 @@ export function ProjectDialog({
             ↗
           </span>
           <p>{description}</p>
+          <p className="project-disclosure">
+            Independent concept project, not commissioned client work.
+          </p>
           <span className="meta project-link">VIEW PROJECT ↗</span>
         </div>
       </DialogTrigger>
@@ -287,7 +290,7 @@ export function RiftProject() {
           oversized editorial typography, atmospheric imagery, and immersive
           digital storytelling. A fictional fashion brand concept created by
           ELVYN to demonstrate the possibilities of expressive, high-impact web
-          design.
+          design. It is a concept project, not commissioned client work.
         </p>
         <dl className="rift-project-details">
           <div>
